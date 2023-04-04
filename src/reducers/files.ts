@@ -5,6 +5,10 @@ import {
   UPLOAD_DOCUMENTS_ERROR,
   UPLOAD_DOCUMENTS_SUCCESS,
   CLEAR_UPLOAD_FILES_REDUCER,
+  DELETE_FILE_SUCCESS,
+  DELETE_FILE_ERROR,
+  VERIFY_UNIQUE_CODE_SUCCESS,
+  VERIFY_UNIQUE_CODE_ERROR,
 } from "../actions/Types";
 
 export type Actions =
@@ -29,6 +33,22 @@ export type Actions =
     }
   | {
       type: typeof CLEAR_UPLOAD_FILES_REDUCER;
+    }
+  | {
+      type: typeof DELETE_FILE_SUCCESS;
+      payload: string;
+    }
+  | {
+      type: typeof DELETE_FILE_ERROR;
+      payload: string;
+    }
+  | {
+      type: typeof VERIFY_UNIQUE_CODE_SUCCESS;
+      payload: any;
+    }
+  | {
+      type: typeof VERIFY_UNIQUE_CODE_ERROR;
+      payload: string;
     };
 
 interface FileInterface {
@@ -36,6 +56,10 @@ interface FileInterface {
   allFilesError: string;
   uploadDocumentsSuccess: any;
   uploadDocumentsError: string;
+  deleteFileSuccess: string;
+  deleteFileError: string;
+  verifyUniqueCodeSuccess: any;
+  verifyUniqueCodeError: string;
 }
 
 export type State = FileInterface;
@@ -46,6 +70,10 @@ export const initialState: State = {
   allFilesError: "",
   uploadDocumentsSuccess: {},
   uploadDocumentsError: "",
+  deleteFileSuccess: "",
+  deleteFileError: "",
+  verifyUniqueCodeSuccess: {},
+  verifyUniqueCodeError: "",
 };
 
 export const Files = (state: State = initialState, action: Actions) => {
@@ -94,11 +122,39 @@ export const Files = (state: State = initialState, action: Actions) => {
       };
 
     // if action is of type CLEAR_UPLOAD_FILES_REDUCER return the state by setting uploadDocumentsSuccess as empty object and uploadDocumentsError as empty string
-    case UPLOAD_DOCUMENTS_ERROR:
+    case CLEAR_UPLOAD_FILES_REDUCER:
       return {
         ...state,
         uploadDocumentsSuccess: {},
         uploadDocumentsError: "",
+      };
+
+    case DELETE_FILE_SUCCESS:
+      return {
+        ...state,
+        deleteFileSuccess: action.payload,
+        deleteFileError: "",
+      };
+
+    case DELETE_FILE_ERROR:
+      return {
+        ...state,
+        deleteFileSuccess: "",
+        deleteFileError: action.payload,
+      };
+
+    case VERIFY_UNIQUE_CODE_SUCCESS:
+      return {
+        ...state,
+        verifyUniqueCodeSuccess: action.payload,
+        verifyUniqueCodeError: "",
+      };
+
+    case VERIFY_UNIQUE_CODE_ERROR:
+      return {
+        ...state,
+        verifyUniqueCodeSuccess: {},
+        verifyUniqueCodeError: action.payload,
       };
 
     // return state as it is if action is not of any of the mentioned types

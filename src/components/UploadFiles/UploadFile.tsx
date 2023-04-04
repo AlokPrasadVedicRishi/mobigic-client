@@ -12,7 +12,8 @@ interface Props {
   cancelClickFunction: any;
   onSuccess: any;
   showUploadFileLoader: boolean;
-  filesState: any;
+  uploadFileSuccess: any;
+  uploadFileError: string;
 }
 
 export const UploadFile: React.FC<Props> = ({
@@ -20,7 +21,8 @@ export const UploadFile: React.FC<Props> = ({
   cancelClickFunction,
   onSuccess,
   showUploadFileLoader,
-  filesState,
+  uploadFileSuccess,
+  uploadFileError,
 }) => {
   // For Storing selected Files
   const [selectedFile, setSelectedFile] = useState<any>(null);
@@ -76,7 +78,7 @@ export const UploadFile: React.FC<Props> = ({
 
   useEffect(() => {
     setSelectedFile(null);
-  }, [filesState.uploadDocumentsError || filesState.uploadDocumentsSuccess]);
+  }, [uploadFileSuccess, uploadFileError]);
 
   return (
     <div>
@@ -117,14 +119,14 @@ export const UploadFile: React.FC<Props> = ({
                 <p>Please wait uploading</p>
               </div>
             ) : // If success message is present then show success message
-            filesState.uploadDocumentsSuccess ? (
+            Object.keys(uploadFileSuccess).length > 0 ? (
               <div className="file-upload-success">
                 <div className="file-upload-unique-code">
-                  <p>{filesState.uploadDocumentsSuccess.uniqueHexCode}</p>
+                  <p>{uploadFileSuccess.uniqueHexCode}</p>
                   <button
                     onClick={() =>
                       navigator.clipboard.writeText(
-                        filesState.uploadDocumentsSuccess.uniqueHexCode
+                        uploadFileSuccess.uniqueHexCode
                       )
                     }
                     className="file-upload-unique-code-copy"
@@ -133,15 +135,15 @@ export const UploadFile: React.FC<Props> = ({
                   </button>
                 </div>
                 <p className="file-upload-success-msg" id="upload-file-success">
-                  {filesState.uploadDocumentsSuccess.message}
+                  {uploadFileSuccess.message}
                 </p>
               </div>
             ) : (
-              filesState.uploadDocumentsError && (
+              uploadFileError && (
                 <div>
                   {/* // If error message is present then show error message */}
                   <p className="file-upload-error-msg" id="upload-file-error">
-                    {filesState.uploadDocumentsError}
+                    {uploadFileError}
                   </p>
                 </div>
               )

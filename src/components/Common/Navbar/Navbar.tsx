@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/navbar.css";
 import { UserContext } from "../../../contexts/User";
 import { logout } from "../../../actions/user";
@@ -10,6 +10,8 @@ export const Navbar: React.FC = () => {
   const { state: userState, dispatch: userDispatch } = useContext(UserContext);
   //token variable in the state and setToken method for updating the token value
   const [token, setToken] = useState<string | null>();
+
+  const navigate = useNavigate();
 
   //Method to handle logout operation
   const handleLogout = () => {
@@ -27,7 +29,9 @@ export const Navbar: React.FC = () => {
     <div className="nav">
       <input type="checkbox" id="nav-check" />
       <div className="nav-header">
-        <div className="nav-title">Welcome</div>
+        <div className="nav-title" onClick={() => navigate("/")}>
+          Welcome{" "}
+        </div>
       </div>
       <div className="nav-btn">
         <label htmlFor="nav-check">
@@ -44,7 +48,6 @@ export const Navbar: React.FC = () => {
         {!token && <Link to="sign-up">Sign Up</Link>}
         {token && (
           <>
-            <Link to="/upload">Upload</Link>
             <a style={{ cursor: "pointer" }} onClick={handleLogout}>
               Logout
             </a>

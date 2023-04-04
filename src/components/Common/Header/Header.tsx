@@ -1,4 +1,3 @@
-import React from "react";
 import "../../styles/header.css";
 import backButton from "../../../assets/images/back_icon.svg";
 
@@ -9,11 +8,11 @@ export interface IHeaderProps {
 }
 
 // Used to show header at the top of the screen
-export default function Header({
+export const Header: React.FC<IHeaderProps> = ({
   showBackButton,
   headerTitle,
   handleBackClick,
-}: IHeaderProps) {
+}) => {
   return (
     <div className="header" id="header">
       <div>
@@ -34,4 +33,4 @@ export default function Header({
       </div>
     </div>
   );
-}
+};

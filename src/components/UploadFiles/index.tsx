@@ -11,6 +11,7 @@ import { clearUploadFileReducer, uploadFile } from "../../actions/files";
 import uploadSvg from "../../assets/images/uploadSvg.svg";
 import useUserDetails from "../../hooks/useUserDetails";
 import "../styles/upload-file.css";
+import { useNavigate } from "react-router-dom";
 
 export const Upload: React.FC = () => {
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
@@ -19,7 +20,11 @@ export const Upload: React.FC = () => {
     useContext(FilesContext);
 
   const [showUploadFileLoader, setShowUploadFileLoader] = useState(false);
-  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
+  const [uploadDocumentError, setUploadDocumentError] = useState<string>("");
+  const [uploadDocumentSuccess, setUploadDocumentSuccess] = useState<any>({});
+
+  const navigate = useNavigate();
 
   // validate token
   useUserDetails();
@@ -35,20 +40,24 @@ export const Upload: React.FC = () => {
 
     // Call action creator to upload file
     await uploadFile(data)(filesDispatch, loadingDispatch);
+    setShowUploadFileLoader(false);
   };
 
   useEffect(() => {
+    setUploadDocumentSuccess(filesState.uploadDocumentsSuccess);
+    setUploadDocumentError(filesState.uploadDocumentsError);
+
     // check if success and no error
     if (Object.keys(filesState.uploadDocumentsSuccess).length > 0) {
       // then execute success action
-      afterUploadAction(2500);
+      afterUploadAction(8000);
     }
 
     if (filesState.uploadDocumentsError) {
       // then execute error action
-      afterUploadAction(3000);
+      afterUploadAction(4000);
     }
-  }, [filesState.uploadDocumentsError || filesState.uploadDocumentsSuccess]);
+  }, [filesState.uploadDocumentsError, filesState.uploadDocumentsSuccess]);
 
   // Function to be called when there is ans of upload action
   const afterUploadAction = (timer: number) => {
@@ -59,6 +68,9 @@ export const Upload: React.FC = () => {
       // clear the reducer messages
       clearUploadFileReducer(filesDispatch);
       toggleUploadModal();
+
+      // navigate user back to the list page
+      navigate("/");
     }, timer);
   };
 
@@ -86,7 +98,8 @@ export const Upload: React.FC = () => {
           cancelClickFunction={toggleUploadModal}
           onSuccess={uploadFiles}
           showUploadFileLoader={showUploadFileLoader}
-          filesState={filesState}
+          uploadFileSuccess={uploadDocumentSuccess}
+          uploadFileError={uploadDocumentError}
         />
       )}
     </div>

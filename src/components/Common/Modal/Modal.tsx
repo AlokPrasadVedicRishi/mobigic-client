@@ -1,13 +1,12 @@
 import React from "react";
 import "../../styles/modal.css";
-import Header from "../Header/Header";
+import { Header } from "../Header/Header";
 
 interface Props {
   modalStyle?: object; //Style object for modal
   modalClass?: string; //Class props for the main modal container
   children: React.ReactNode; //Passing a react component here or div elements
   showModal: boolean; //toggle modal props(mandatory)
-  handleBlur?: () => void; //function to handle behavior when clicked outside modal
   isFlexible?: boolean; // if true then makes the modal full device size in smaller devices else small with backdrop
   showHeader?: boolean; // if true then adds header at the top of the modal
   showBackButton?: boolean; // shows back button on the header if true else not
@@ -21,7 +20,6 @@ export const Modal: React.FC<Props> = ({
   modalClass,
   children,
   showModal,
-  handleBlur,
   isFlexible,
   showHeader,
   showBackButton,

@@ -4,17 +4,23 @@ import "../styles/list-files.css";
 
 import { Loading } from "../Common/Loading/Loading";
 import { getColor } from "../../helpers/randomColor";
+import deleteIcon from "../../assets/icons/delete.svg";
+import downLoadIcon from "../../assets/icons/download.svg";
 
 interface Props {
   fileDetails: any;
   allFilesError: any;
   showLoader: boolean;
+  onDeleteIconClick: (fileId: number) => void;
+  onDownLoadClick: (fileId: number) => void;
 }
 
 export const ListFiles: React.FC<Props> = ({
   fileDetails,
   allFilesError,
   showLoader,
+  onDeleteIconClick,
+  onDownLoadClick,
 }) => {
   return showLoader ? (
     <Loading />
@@ -39,17 +45,32 @@ export const ListFiles: React.FC<Props> = ({
                 <p className="file-desc">File Id</p>
               </div>
 
-              <div>
-                <p className="file-info">{item.id}</p>
-                <p className="file-desc">File Id</p>
-              </div>
-
               {/* SMS Template for file */}
               <div className="file-onboard-date">
                 <p className="file-info">
                   {new Date(item.uploaded_at).toLocaleDateString()}
                 </p>
                 <p className="file-desc">Date</p>
+              </div>
+
+              <div>
+                <div className="icon-container">
+                  <img
+                    src={deleteIcon}
+                    onClick={() => onDeleteIconClick(item.id)}
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="icon-container">
+                  <img
+                    src={downLoadIcon}
+                    onClick={() => onDownLoadClick(item.id)}
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
           </ListItem>

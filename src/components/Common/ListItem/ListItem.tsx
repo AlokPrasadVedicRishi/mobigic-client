@@ -4,23 +4,19 @@ import "../../styles/list-item.css";
 interface Props {
   id?: number | string; //unique number for id
   titleText?: string; //Title of the list item
-  metaText?: string; //Second title/meta text for list
   children?: React.ReactNode; //Passing a react component here or div elements
   listStyle?: object; //style object for the list item as props
   handleClick?: () => void; //Onclick event handler of the button element
-  metaTextStyle?: object; //style object for the meta text as props
   backgroundColor?: string;
 }
 
 //Common List view  Component
 export const ListItem: React.FC<Props> = ({
   titleText,
-  metaText,
   children,
   listStyle,
   handleClick,
   id,
-  metaTextStyle,
   backgroundColor,
 }) => {
   // stores the background id of hovered element
@@ -34,8 +30,8 @@ export const ListItem: React.FC<Props> = ({
   };
 
   return (
-    //   if there is a style object in props then apply else default style
-    <button
+    // if there is a style object in props then apply else default style
+    <div
       key={"list" + id}
       id={
         id?.toString() ? "list-parent-container-" + id : "list-parent-container"
@@ -71,19 +67,10 @@ export const ListItem: React.FC<Props> = ({
           >
             {titleText}
           </h4>
-          {metaText ? (
-            <p
-              className="meta-text"
-              id={id?.toString() ? "meta-text-" + id : "meta-text"}
-              style={metaTextStyle ? metaTextStyle : {}}
-            >
-              {metaText}
-            </p>
-          ) : null}
         </div>
       </div>
       {/* Pass the children as child of the list view component being called in the file */}
       <div className="children-container">{children}</div>
-    </button>
+    </div>
   );
 };

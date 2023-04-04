@@ -12,19 +12,6 @@ export const isPasswordValid = (password: string) => {
   return password.length >= 8;
 };
 
-// Function to check if an error is due to invalid token
-export const isTokenInvalidError = (err: any) => {
-  // If error is due to invalid token, send the user to the error page
-  if (
-    err?.response?.status === 401 ||
-    err?.response?.status === 403 ||
-    err?.response?.status === 406
-  ) {
-    window.location.href = "/sign-in";
-  }
-  return false;
-};
-
 // Function to validate JWT
 export const isJWTValid = () => {
   // Get the token from local storage and check if it exists
