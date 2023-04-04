@@ -11,6 +11,11 @@ import { Loading } from "../Common/Loading/Loading";
 import { LoadingContext } from "../../contexts/Loading";
 import "../styles/sign-in-sign-up.css";
 import { Form } from "../Common/Form/Form";
+import {
+  showFailureToast,
+  showSuccessToast,
+} from "../../actions/toast-message";
+import { ToastMessagesContext } from "../../contexts/ToastMessages";
 
 //SignIn component
 export const SignIn: React.FC = () => {
@@ -25,6 +30,7 @@ export const SignIn: React.FC = () => {
   //Get the state and the dispatch properties form the LoadingContext and rename them to loadingState and loadingDispatch resp.
   const { state: loadingState, dispatch: loadingDispatch } =
     useContext(LoadingContext);
+  const { dispatch: toastMessagesDispatch } = useContext(ToastMessagesContext);
 
   const navigate = useNavigate();
 
@@ -73,6 +79,16 @@ export const SignIn: React.FC = () => {
       navigate("/");
     }
   }, []);
+
+  useEffect(() => {
+    console.log("userState", userState);
+    if (userState.error) {
+      showFailureToast(userState.error)(toastMessagesDispatch);
+    } else if (userState.token) {
+      showSuccessToast("Successfully logged in")(toastMessagesDispatch);
+      navigate("/");
+    }
+  }, [userState.token, userState.error]);
 
   return (
     <Form>

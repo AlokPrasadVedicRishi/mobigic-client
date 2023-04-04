@@ -1,9 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-import { ToastMessagesContext } from "./contexts/ToastMessages";
+import {
+  ToastMessagesContext,
+  ToastMessagesContextProvider,
+} from "./contexts/ToastMessages";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { LoadingContextProvider } from "./contexts/Loading";
 
 import "./App.css";
@@ -31,7 +36,9 @@ const App: React.FC = () => {
     <LoadingContextProvider>
       <UserContextProvider>
         <FilesContextProvider>
-          <AppWithErrorBoundary />
+          <ToastMessagesContextProvider>
+            <AppWithErrorBoundary />
+          </ToastMessagesContextProvider>
         </FilesContextProvider>
       </UserContextProvider>
     </LoadingContextProvider>
@@ -91,7 +98,7 @@ const AppWithToastMessages: React.FC = () => {
     <>
       <ToastContainer
         position="top-right"
-        autoClose={10000}
+        autoClose={5000}
         closeOnClick
         pauseOnFocusLoss
         draggable

@@ -48,8 +48,6 @@ export const signIn =
 
       //Add Authorization header to all future axios requests
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      //Redirect user to home screen
-      window.location.href = "/";
     } catch (err: any) {
       //dispatch the error data
       dispatch({
