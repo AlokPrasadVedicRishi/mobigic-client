@@ -1,0 +1,79 @@
+.modal-background {
+    height: 100%;
+    width: 100vw;
+    z-index: 10;
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-layout {
+    z-index: 11;
+    background-color: white;
+    height: auto;
+    width: auto;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-layout.flexible {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0px;
+}
+
+.modal-layout>.modal-child-container {
+    height: 100%;
+}
+
+.modal-layout.flexible>.modal-child-container {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.modal-layout.modal-header>.modal-child-container {
+    height: calc(100% - var(--navbarHeaderHeight));
+}
+
+.background-modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media only screen and (min-width: 500px) {
+    .modal-layout {
+        max-width: 70%;
+        max-height: 80%;
+        border-radius: 10px;
+    }
+    .modal-layout.flexible {
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .modal-layout {
+        max-width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .modal-layout {
+        max-width: 40%;
+    }
+}
+
+@media only screen and (max-height: 475px) {
+    .modal-layout {
+        max-height: 100%;
+    }
+}

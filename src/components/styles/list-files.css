@@ -1,0 +1,232 @@
+.list-file-container {
+    height: calc(100vh - 60px);
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    padding-bottom: 20px;
+    overflow-y: auto;
+}
+
+.list-file-right-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.list-file-right-container div {
+    padding: 0px 20px;
+}
+
+.list-file-container .children-container {
+    width: inherit;
+}
+
+.add-icon-container {
+    float: right;
+    height: 50px;
+    width: 50px;
+}
+
+.file-info {
+    font-size: 14px;
+    color: #4f4f4f;
+    padding: 5px;
+    text-align: center;
+    margin: 0px 10px;
+    word-break: break-all;
+    width: 200px;
+}
+
+.file-desc {
+    font-size: 12px;
+    color: #828282;
+    padding: 2px;
+    text-align: center;
+}
+
+.file-upload {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.no-file-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    min-height: 50vh;
+}
+
+.no-file-message {
+    text-align: center;
+    color: var(--primaryBlue);
+    margin: auto;
+    font-size: 36px;
+}
+
+.file-detail-modal>div>.modal-layout {
+    width: 90%;
+    height: auto;
+    max-width: 500px;
+    border-radius: 10px;
+    margin-bottom: 5vh;
+    padding: 15px;
+}
+
+.file-detail-modal>.modal-background {
+    z-index: 6;
+    height: 100vh;
+    top: 0px;
+    padding: 20px 0px;
+}
+
+.file-status-img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.file-detail-child-container div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.detailed-file-modal-title-container {
+    justify-content: space-between;
+}
+
+.detailed-file-modal-title-container>p {
+    font-size: 20px;
+    color: var(--primaryBlue);
+    padding: 10px 0;
+}
+
+.detailed-file-key {
+    font-size: 14px;
+    color: #828282;
+    padding: 10px;
+    width: 50%;
+}
+
+.detailed-file-value {
+    font-size: 14px;
+    color: #4f4f4f;
+    padding: 10px;
+    width: 50%;
+    word-wrap: break-word;
+}
+
+.file-detail-button-container {
+    margin-bottom: 5px;
+    margin-top: 10px;
+    float: right;
+}
+
+.file-details-loading-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    min-height: 50vh;
+}
+
+.file-details-loading-container img {
+    width: 70px;
+    height: 70px;
+}
+
+.file-content-loader {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    padding: 20px;
+}
+
+.status-search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-files-container {
+    width: 45%;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+    .list-file-right-container {
+        display: none;
+    }
+    .list-file-container .children-container {
+        width: auto;
+    }
+    .status-search-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .search-files-container {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .list-file-right-container-mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 500px) and (min-width: 200px) {
+    .transaction-detail-modal #modal-children {
+        height: 80% !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .file-detail-modal>div>.modal-layout {
+        width: auto;
+        width: 350px;
+        height: auto;
+        margin-bottom: 0vh;
+        padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .list-file-container {
+        height: calc(100vh - 60px);
+        padding: 10px;
+        background-color: white;
+        border-radius: 8px;
+        overflow-y: auto;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .file-onboard-date {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .file-fail-reason {
+        margin-left: 40px;
+    }
+    .file-onboard-date {
+        margin-left: 40px;
+    }
+}
+
+@media only screen and (max-width: 1120px) {
+    .file-fail-reason {
+        display: none;
+    }
+}
