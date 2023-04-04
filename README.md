@@ -3,7 +3,7 @@
 clone the repo and checkout to main branch
 ## Run Script to install dependencies
 ```bash
-yarn start
+yarn install
 ```
 
 ## Run Script to start the application
